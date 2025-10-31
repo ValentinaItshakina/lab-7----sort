@@ -86,8 +86,7 @@ std::vector<float> Merge(std::vector<float> arrb, std::vector<float> arrc){
         }
         k++;
     }
-    if (i=p)
-    {
+    if (i==p){
         for (int a = j; a < q; a++){
             rez[k] = arrc[a];
             k++;
@@ -109,7 +108,7 @@ std::vector<float> Mergesort(std::vector<float> arr){
     if (n <= 1) return arr;
     std::vector<float> rez = arr;
     std::vector<float> rezb = slice(rez, 0, n/2);
-    std::vector<float> rezc = slice(rez, n/2+1, n-1);
+    std::vector<float> rezc = slice(rez, n/2, n);
     rezb = Mergesort(rezb);
     rezc = Mergesort(rezc);
     rez = Merge(rezb,rezc);

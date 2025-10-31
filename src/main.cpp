@@ -9,12 +9,12 @@ int main(){
         std::cout << num << " ";
     }
     std::cout << std::endl;
-    std::vector<float> b = bucketSort(arr);
+    std::vector<float> b = SelectionSort(arr);
     for (float num : b) {
         std::cout << num << " ";
     }
     std::cout << std::endl;
-    std::vector<float> c = bucketSort(arr);
+    std::vector<float> c = Mergesort(arr);
     for (float num : c) {
         std::cout << num << " ";
     }
