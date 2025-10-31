@@ -4,6 +4,15 @@
 #include <sstream>
 #include <string>
 
+std::vector<float> slice(std::vector<float> v, int from, int to){
+    std::vector<float> rez(to-from);
+    for (int i = from; i <= to; i++){
+        rez[i-from] = v[i];
+    }
+    return rez;
+}
+
+
 std::vector<float> inputFloatVectorWithValidation() {
     std::vector<float> numbers;
     std::string input;
@@ -55,5 +64,70 @@ std::vector<float> bucketSort(std::vector<float> arr) {
     }
     }
     
+    return rez;
+}
+
+std::vector<float> Merge(std::vector<float> arrb, std::vector<float> arrc){
+    int p = arrb.size();
+    int q = arrc.size();
+    std::vector<float> rez(p+q);
+    int i = 0, j = 0, k = 0;
+    while (i < p and j < q)
+    {
+        if (arrb[i] <= arrc[j])
+        {
+            rez[k] = arrb[i];
+            i++;
+        }
+        else
+        {
+            rez[k] = arrc[j];
+            j++;
+        }
+        k++;
+    }
+    if (i=p)
+    {
+        for (int a = j; a < q; a++){
+            rez[k] = arrc[a];
+            k++;
+        }
+    }
+    else
+    {
+        for (int a = i; a < p; a++){
+            rez[k] = arrb[a];
+            k++;
+        }
+    }
+
+    return rez;
+}
+
+std::vector<float> Mergesort(std::vector<float> arr){
+    int n = arr.size();
+    if (n <= 1) return arr;
+    std::vector<float> rez = arr;
+    std::vector<float> rezb = slice(rez, 0, n/2);
+    std::vector<float> rezc = slice(rez, n/2+1, n-1);
+    rezb = Mergesort(rezb);
+    rezc = Mergesort(rezc);
+    rez = Merge(rezb,rezc);
+
+    return rez;
+}
+
+std::vector<float> SelectionSort(std::vector<float>& arr){
+    int n = arr.size();
+    std::vector<float> rez = arr;
+    for (int i = 0; i < n - 1; ++i) {
+        int min = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (rez[j] < rez[min]) {
+                min = j;
+            }
+        }
+        std::swap(rez[min], rez[i]);
+    }
     return rez;
 }
